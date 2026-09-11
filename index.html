@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 8 Science: Drag & Streamlining Virtual Experiment</title>
+<style>
+  body { font-family: Arial, sans-serif; margin:0; background:#f5f7fa; color:#222; }
+  header { background:#243b53; color:white; padding:22px; text-align:center; }
+  .wrap { max-width:1100px; margin:20px auto; padding:0 18px; }
+  .card { background:white; border-radius:12px; padding:20px; margin:16px 0; box-shadow:0 2px 8px #0001; }
+  h2 { color:#243b53; margin-top:0; }
+  .controls { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:15px; }
+  label { font-weight:bold; display:block; margin-bottom:6px; }
+  select,input { width:100%; box-sizing:border-box; padding:9px; border:1px solid #bcccdc; border-radius:7px; font-size:15px; }
+  button { padding:10px 16px; border:0; border-radius:7px; background:#2f855a; color:white; font-weight:bold; cursor:pointer; margin:5px 5px 5px 0; }
+  button.secondary { background:#486581; }
+  button.clear { background:#9b2c2c; }
+  .experiment { display:grid; grid-template-columns:1.3fr .7fr; gap:20px; }
+  #windTunnel { position:relative; height:300px; overflow:hidden; border-radius:10px; background:linear-gradient(90deg,#dff3ff,#fff); border:2px solid #9fb3c8; }
+  .wind { position:absolute; left:-40px; width:38px; height:3px; background:#6b9ac4; opacity:.55; animation:flow 2s linear infinite; }
+  @keyframes flow { from{transform:translateX(0)} to{transform:translateX(1200px)} }
+  #object { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:#f6ad55; border:3px solid #9c5c10; transition:.3s; }
+  .result { font-size:18px; padding:15px; background:#edf2f7; border-radius:8px; }
+  table { width:100%; border-collapse:collapse; margin-top:10px; }
+  th,td { border:1px solid #cbd5e0; padding:8px; text-align:center; }
+  th { background:#e2e8f0; }
+  .question { margin:12px 0; }
+  .question input { max-width:100%; }
+  .note { background:#fffbea; border-left:5px solid #d69e2e; padding:12px; }
+  @media(max-width:750px){ .experiment{grid-template-columns:1fr;} }
+</style>
+
+<style>
+body{background:#f8f9fa;font-family:Arial,Helvetica,sans-serif;color:#202124}
+.site-top{background:#fff;border-bottom:1px solid #dadce0;position:sticky;top:0;z-index:20}
+.site-nav{max-width:1100px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between}
+.site-title{font-size:20px;font-weight:500;color:#3c4043}
+.site-title span{color:#4285f4}
+.site-pill{font-size:14px;color:#5f6368}
+.hero{max-width:1100px;margin:24px auto 0;border-radius:14px;background:#e8f0fe;padding:42px 38px}
+.hero h1{font-size:38px;font-weight:500;margin:0 0 10px;color:#174ea6}
+.hero p{font-size:18px;margin:0;color:#3c4043}
+.progress{max-width:1100px;margin:18px auto;display:flex;gap:8px;flex-wrap:wrap;padding:0 18px}
+.progress span{padding:8px 13px;border-radius:18px;background:#fff;border:1px solid #dadce0;font-size:13px;color:#5f6368}
+.wrap{max-width:1100px}
+.card{border:1px solid #dadce0;box-shadow:none;border-radius:10px}
+.card h2{font-weight:500;color:#202124}
+button{background:#1a73e8;border-radius:20px}
+button.secondary{background:#5f6368}
+button.clear{background:#d93025}
+.section-tag{display:inline-block;color:#1a73e8;font-weight:bold;font-size:13px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.teacher-note{background:#e6f4ea;border-left:4px solid #34a853;padding:13px;border-radius:5px}
+.footer{max-width:1100px;margin:35px auto;padding:25px 18px;color:#5f6368;font-size:13px;border-top:1px solid #dadce0}
+</style>
+</head>
+<body>
+<div class="site-top">
+  <div class="site-nav">
+    <div class="site-title"><span>Science 8</span> • Forces in Fluids</div>
+    <div class="site-pill">Virtual Investigation</div>
+  </div>
+</div>
+<div class="hero">
+  <h1>Drag & Streamlining</h1>
+  <p>How does the shape of an object affect the force of air resistance?</p>
+</div>
+<div class="progress">
+  <span>1. Predict</span><span>2. Experiment</span><span>3. Collect Data</span>
+  <span>4. Find Patterns</span><span>5. Explain</span>
+</div>
+
+<header>
+  <h1>Drag & Streamlining Virtual Experiment</h1>
+  <p>Grade 8 Science • Investigating how shape and speed affect air resistance</p>
+</header>
+
+<div class="wrap">
+
+<div class="card"><div class="section-tag">Start here</div>
+<h2>Learning Goals</h2>
+<ul>
+<li>Describe <strong>drag</strong> as a force that opposes motion through a fluid such as air.</li>
+<li>Investigate how an object's <strong>shape</strong> affects drag.</li>
+<li>Explain how <strong>streamlining</strong> can reduce drag.</li>
+<li>Use evidence from an experiment to support a scientific conclusion.</li>
+</ul>
+<div class="note"><strong>Fair test:</strong> When comparing shapes, keep the speed, size, and material the same. Change only one variable at a time.</div>
+</div>
+
+<div class="card"><div class="section-tag">Step 1 • Predict</div>
+<h2>Part 1: Make a Prediction</h2>
+<p>Before running the experiment, predict which shape will experience the most and least drag.</p>
+<div class="question"><label>Most drag:</label>
+<select id="predMost"><option>Flat plate</option><option>Cube</option><option>Sphere</option><option>Streamlined</option></select></div>
+<div class="question"><label>Least drag:</label>
+<select id="predLeast"><option>Flat plate</option><option>Cube</option><option>Sphere</option><option>Streamlined</option></select></div>
+</div>
+
+<div class="card"><div class="section-tag">Step 2 • Experiment</div>
+<h2>Part 2: Virtual Wind Tunnel</h2>
+<div class="controls">
+  <div><label for="shape">Object shape</label>
+  <select id="shape">
+    <option value="flat">Flat plate</option>
+    <option value="cube">Cube</option>
+    <option value="sphere">Sphere</option>
+    <option value="streamlined">Streamlined</option>
+  </select></div>
+  <div><label for="speed">Air speed: <span id="speedVal">20</span> m/s</label>
+  <input id="speed" type="range" min="5" max="50" value="20"></div>
+  <div><label for="size">Object size: <span id="sizeVal">1.0</span> m²</label>
+  <input id="size" type="range" min="0.5" max="2" value="1" step="0.1"></div>
+</div>
+
+<div class="experiment" style="margin-top:18px;">
+  <div>
+    <div id="windTunnel">
+      <div id="object"></div>
+    </div>
+  </div>
+  <div class="result">
+    <p><strong>Drag force:</strong> <span id="drag">0</span> N</p>
+    <p><strong>Drag coefficient:</strong> <span id="cd">0</span></p>
+    <p id="description"></p>
+    <button onclick="runTrial()">Run Trial</button>
+    <button class="secondary" onclick="addTrial()">Add to Data Table</button>
+  </div>
+</div>
+</div>
+
+<div class="card"><div class="section-tag">Step 3 • Collect evidence</div>
+<h2>Part 3: Collect Data</h2>
+<p>Keep the size at 1.0 m² and air speed at 20 m/s. Test each shape.</p>
+<table id="dataTable">
+<thead><tr><th>Trial</th><th>Shape</th><th>Speed (m/s)</th><th>Size (m²)</th><th>Drag (N)</th></tr></thead>
+<tbody></tbody>
+</table>
+<button class="clear" onclick="clearTable()">Clear Data</button>
+</div>
+
+<div class="card"><div class="section-tag">Step 4 • Find a pattern</div>
+<h2>Part 4: Investigate Speed</h2>
+<p>Choose the <strong>streamlined</strong> shape. Keep size at 1.0 m². Test at several speeds and record the drag.</p>
+<table>
+<thead><tr><th>Speed (m/s)</th><th>Drag (N)</th><th>What pattern do you notice?</th></tr></thead>
+<tbody>
+<tr><td>10</td><td><input class="speedAnswer"></td><td rowspan="5"><textarea id="speedPattern" style="width:100%;height:120px;" placeholder="Describe the pattern..."></textarea></td></tr>
+<tr><td>20</td><td><input class="speedAnswer"></td></tr>
+<tr><td>30</td><td><input class="speedAnswer"></td></tr>
+<tr><td>40</td><td><input class="speedAnswer"></td></tr>
+<tr><td>50</td><td><input class="speedAnswer"></td></tr>
+</tbody>
+</table>
+<button class="secondary" onclick="fillSpeedTable()">Calculate Drag Values</button>
+</div>
+
+<div class="card"><div class="section-tag">Step 5 • Explain</div>
+<h2>Part 5: Analyze Your Results</h2>
+<div class="question"><label>1. Which shape produced the greatest drag? Why do you think this happened?</label><textarea style="width:100%;height:70px;"></textarea></div>
+<div class="question"><label>2. Which shape produced the least drag?</label><textarea style="width:100%;height:60px;"></textarea></div>
+<div class="question"><label>3. What happened to drag when air speed increased?</label><textarea style="width:100%;height:60px;"></textarea></div>
+<div class="question"><label>4. How does streamlining help an object move through air?</label><textarea style="width:100%;height:70px;"></textarea></div>
+<div class="question"><label>5. Give two real-world examples where reducing drag is useful.</label><textarea style="width:100%;height:60px;"></textarea></div>
+</div>
+
+<div class="card"><div class="section-tag">Finish</div>
+<h2>Exit Ticket</h2>
+<p><strong>In your own words, explain why a streamlined shape generally experiences less drag than a blunt shape.</strong></p>
+<textarea style="width:100%;height:100px;" placeholder="Your explanation..."></textarea>
+</div>
+
+</div>
+
+<script>
+const coefficients = {flat:1.28, cube:1.05, sphere:0.47, streamlined:0.12};
+const names = {flat:"Flat plate",cube:"Cube",sphere:"Sphere",streamlined:"Streamlined"};
+
+const shapeEl=document.getElementById("shape");
+const speedEl=document.getElementById("speed");
+const sizeEl=document.getElementById("size");
+const objectEl=document.getElementById("object");
+
+function calc(){
+  const s=shapeEl.value, v=+speedEl.value, A=+sizeEl.value;
+  const rho=1.225;
+  const F=0.5*rho*coefficients[s]*A*v*v;
+  document.getElementById("drag").textContent=F.toFixed(1);
+  document.getElementById("cd").textContent=coefficients[s].toFixed(2);
+  document.getElementById("speedVal").textContent=v;
+  document.getElementById("sizeVal").textContent=A.toFixed(1);
+  const desc={
+    flat:"The flat face pushes strongly against the air, creating high drag.",
+    cube:"The blunt shape creates substantial drag as air flows around it.",
+    sphere:"The rounded shape reduces drag compared with a blunt object.",
+    streamlined:"The tapered shape allows air to flow around the object more smoothly, reducing drag."
+  };
+  document.getElementById("description").textContent=desc[s];
+  updateObject();
+}
+function updateObject(){
+  const s=shapeEl.value;
+  objectEl.style.width="90px"; objectEl.style.height="70px"; objectEl.style.borderRadius="4px";
+  if(s==="flat"){objectEl.style.width="18px";objectEl.style.height="105px";objectEl.style.borderRadius="2px";}
+  if(s==="cube"){objectEl.style.width="75px";objectEl.style.height="75px";}
+  if(s==="sphere"){objectEl.style.width="80px";objectEl.style.height="80px";objectEl.style.borderRadius="50%";}
+  if(s==="streamlined"){objectEl.style.width="120px";objectEl.style.height="48px";objectEl.style.borderRadius="50% 65% 65% 50%";}
+}
+function runTrial(){calc();}
+let trial=0;
+function addTrial(){
+  calc(); trial++;
+  const row=document.querySelector("#dataTable tbody").insertRow();
+  const vals=[trial,names[shapeEl.value],speedEl.value,sizeEl.value,document.getElementById("drag").textContent];
+  vals.forEach(x=>{let c=row.insertCell();c.textContent=x;});
+}
+function clearTable(){document.querySelector("#dataTable tbody").innerHTML="";trial=0;}
+function fillSpeedTable(){
+  const s="streamlined", rho=1.225, A=1;
+  const inputs=document.querySelectorAll(".speedAnswer");
+  [10,20,30,40,50].forEach((v,i)=>{
+    const F=0.5*rho*coefficients[s]*A*v*v;
+    inputs[i].value=F.toFixed(1);
+  });
+}
+speedEl.addEventListener("input",calc); sizeEl.addEventListener("input",calc); shapeEl.addEventListener("change",calc);
+for(let i=0;i<25;i++){
+ const w=document.createElement("div"); w.className="wind";
+ w.style.top=(8+i*11)+"px"; w.style.animationDelay=(-i*0.12)+"s";
+ document.getElementById("windTunnel").appendChild(w);
+}
+calc();
+</script>
+</body>
+</html>
